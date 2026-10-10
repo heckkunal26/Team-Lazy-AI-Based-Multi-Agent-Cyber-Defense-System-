@@ -47,9 +47,4 @@ Docker: `docker compose up --build` (see docker-compose.yml).
 - Message bus is in-process asyncio; scale-out path is Redis Streams/Kafka with the same four topics.
 - Human feedback ("false positive") is audit-logged for the next retraining run; the model is not retrained online.
 
-## 3-minute demo
-1. Open dashboard: live flows, **live precision/recall vs ground truth**, ms per flow.
-2. Show an incident: MITRE tag, evidence, playbook, Acknowledge → report.
-3. In a terminal, paste the `curl` ssh lines (6×) → watch a Credential Access incident from a real public IP get contained (DRY-RUN `netsh`/`iptables` command shown).
-4. Send a web attack line from the same IP → **kill-chain** escalation. Open `/api/audit`.
-5. Close with the metrics card and the honest limitations.
+
