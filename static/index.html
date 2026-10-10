@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Team Lazy · AI Cyber Defense (live)</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #131a30;
+      --bd: #232d4d;
+      --tx: #e6ebff;
+      --mu: #8b97c2;
+      --ac: #4cc9f0;
+      --ok: #3ddc97;
+      --wa: #ffb703;
+      --er: #ff4d6d;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0b1020;
+      --card: #131a30;
+      --bd: #232d4d;
+      --tx: #e6ebff;
+      --mu: #8b97c2;
+      --ac: #4cc9f0;
+      --ok: #3ddc97;
+      --wa: #ffb703;
+      --er: #ff4d6d;
+    }
+
+    :root[data-theme="light"] {
+      --bg: #f4f6fc;
+      --card: #ffffff;
+      --bd: #d5dde8;
+      --tx: #111827;
+      --mu: #4b5563;
+      --ac: #0284c7;
+      --ok: #059669;
+      --wa: #d97706;
+      --er: #dc2626;
+    }
+
+    @media (prefers-color-scheme:light) {
+      :root:not([data-theme="dark"]) {
+        --bg: #f4f6fc;
+        --card: #ffffff;
+        --bd: #d5dde8;
+        --tx: #111827;
+        --mu: #4b5563;
+        --ac: #0284c7;
+        --ok: #059669;
+        --wa: #d97706;
+        --er: #dc2626;
+      }
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--tx);
+      font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    header {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--bd);
+      background: var(--card);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .card,
+    .st,
+    .inc {
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* Theme slider bar */
+    .theme-slider-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .theme-switch {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg);
+      border: 1px solid var(--bd);
+      border-radius: 9999px;
+      padding: 3px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+      user-select: none;
+    }
+
+    .theme-slider-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: calc(50% - 3px);
+      height: calc(100% - 6px);
+      background: var(--card);
+      border: 1px solid var(--bd);
+      border-radius: 9999px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .theme-opt {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 6px 14px;
+      min-width: 82px;
+      border-radius: 9999px;
+      border: none;
+      background: transparent;
+      color: var(--mu);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.25s ease;
+    }
+
+    .theme-opt:hover {
+      color: var(--tx);
+    }
+
+    .theme-opt.active {
+      color: var(--ac);
+      font-weight: 600;
+    }
+
+    .theme-icon {
+      width: 14px;
+      height: 14px;
+      stroke-width: 2.2;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 18px
+    }
+
+    h1 span {
+      color: var(--ac)
+    }
+
+    .sub {
+      color: var(--mu);
+      font-size: 12px;
+      margin-top: 2px
+    }
+
+    main {
+      display: grid;
+      gap: 12px;
+      padding: 12px;
+      grid-template-columns: 1fr;
+      max-width: 1300px;
+      margin: auto
+    }
+
+    @media(min-width:900px) {
+      main {
+        grid-template-columns: 300px 1fr 1fr
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--bd);
+      border-radius: 10px;
+      padding: 12px;
+      min-width: 0
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--mu)
+    }
+
+    .agents {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px
+    }
+
+    .ag {
+      padding: 5px 9px;
+      border-radius: 99px;
+      border: 1px solid var(--bd);
+      font-size: 12px;
+      color: var(--mu);
+      transition: .2s
+    }
+
+    .ag.on {
+      color: #06101f;
+      background: var(--ac);
+      border-color: var(--ac);
+      box-shadow: 0 0 10px var(--ac)
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border-radius: 8px;
+      border: 1px solid var(--bd);
+      background: transparent;
+      color: var(--tx);
+      padding: 7px 10px
+    }
+
+    button:hover {
+      border-color: var(--ac)
+    }
+
+    .atk {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px
+    }
+
+    .atk button.b {
+      border-color: var(--er);
+      color: var(--er)
+    }
+
+    .atk button.g {
+      border-color: var(--ok);
+      color: var(--ok)
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px
+    }
+
+    .st {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 8px
+    }
+
+    .st b {
+      display: block;
+      font-size: 20px
+    }
+
+    .st i {
+      font-style: normal;
+      color: var(--mu);
+      font-size: 11px
+    }
+
+    .log {
+      height: 230px;
+      overflow: auto;
+      font: 11.5px/1.5 ui-monospace, Menlo, Consolas, monospace
+    }
+
+    .log div {
+      padding: 1px 4px;
+      border-radius: 3px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: var(--mu)
+    }
+
+    .log div.bad {
+      color: var(--er);
+      background: rgba(255, 77, 109, .1)
+    }
+
+    .log div.m {
+      color: var(--ac)
+    }
+
+    .inc {
+      border: 1px solid var(--bd);
+      border-left: 4px solid var(--wa);
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: var(--bg)
+    }
+
+    .inc.crit {
+      border-left-color: var(--er)
+    }
+
+    .inc.done {
+      border-left-color: var(--ok)
+    }
+
+    .inc.fp {
+      border-left-color: var(--mu);
+      opacity: .7
+    }
+
+    .inc h3 {
+      margin: 0;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 1px 7px;
+      border-radius: 99px;
+      border: 1px solid var(--bd);
+      color: var(--mu);
+      white-space: nowrap
+    }
+
+    .inc p {
+      margin: 4px 0;
+      font-size: 12.5px
+    }
+
+    .inc .mu {
+      color: var(--mu)
+    }
+
+    .row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px
+    }
+
+    .row button {
+      font-size: 12px;
+      padding: 4px 9px
+    }
+
+    .ap {
+      border-color: var(--ok);
+      color: var(--ok)
+    }
+
+    .rj {
+      border-color: var(--er);
+      color: var(--er)
+    }
+
+    .empty {
+      color: var(--mu);
+      font-size: 13px;
+      padding: 10px 0
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 0
+    }
+
+    code {
+      color: var(--ac)
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <h1>Team Lazy · <span>Multi-Agent Cyber Defense</span></h1>
+      <div class="sub">Real NSL-KDD models · real log sensors · TinyFish live threat-intel (Search + Fetch + Agent APIs)
+        ·
+        human-in-the-loop response</div>
+    </div>
+    <div class="theme-slider-container">
+      <div class="theme-switch" id="themeSwitch" role="group" aria-label="Theme selection">
+        <div class="theme-slider-thumb" id="themeSliderThumb"></div>
+        <button type="button" class="theme-opt active" id="btnThemeDark" onclick="setTheme('dark')"
+          aria-label="Dark Mode">
+          <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span>Dark</span>
+        </button>
+        <button type="button" class="theme-opt" id="btnThemeLight" onclick="setTheme('light')" aria-label="Light Mode">
+          <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <span>Light</span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="col">
+      <div class="card">
+        <h2>Agents</h2>
+        <div class="agents" id="ags"></div>
+      </div>
+      <div class="card">
+        <h2>Live traffic (real labelled flows)</h2>
+        <div class="stats">
+          <div class="st"><b id="s1">0</b><i>flows analysed</i></div>
+          <div class="st"><b id="s2">0</b><i>incidents</i></div>
+          <div class="st"><b id="s3">–</b><i>live precision</i></div>
+          <div class="st"><b id="s4">–</b><i>live recall</i></div>
+          <div class="st"><b id="s5">–</b><i>ms per flow</i></div>
+          <div class="st"><b id="s6">–</b><i>avg time to contain</i></div>
+        </div>
+        <div class="row"><button onclick="rep(true)">Start replay</button><button onclick="rep(false)">Pause</button>
+        </div>
+        <p class="sub" id="mode"></p>
+        <p class="sub" id="tfs"></p>
+      </div>
+      <div class="card">
+        <h2>Model evaluation (held-out KDDTest+)</h2>
+        <div id="mod" class="sub"></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <h2>Monitor · live stream (red = flagged)</h2>
+        <div class="log" id="feed"></div>
+      </div>
+      <div class="card">
+        <h2>Agent message bus</h2>
+        <div class="log" id="bus"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Incidents &amp; response</h2>
+      <div id="incs">
+        <div class="empty">Waiting for traffic…</div>
+      </div>
+    </div>
+  </main>
+  <script>
+    const $ = s => document.querySelector(s), esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const AG = ['Monitor', 'Detect', 'Analyse', 'Intel', 'Respond', 'Report']; $('#ags').innerHTML = AG.map((a, i) => `<span class="ag" id="a${i}">${a}</span>`).join('');
+    function pulse(i) { const e = $('#a' + i); if (!e) return; e.classList.add('on'); setTimeout(() => e.classList.remove('on'), 500) }
+    function line(box, t, c) { const d = document.createElement('div'); d.textContent = t; if (c) d.className = c; const b = $(box); b.prepend(d); while (b.children.length > 50) b.lastChild.remove() }
+    const ts = () => new Date().toLocaleTimeString([], { hour12: false });
+    let S = { inc: {}, st: {}, model: null }, key = '';
+    function connect() { const ws = new WebSocket((location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host + '/ws'); ws.onmessage = m => on(JSON.parse(m.data)); ws.onclose = () => setTimeout(connect, 1500) }
+    function on(m) {
+      if (m.k === 'snap') { S.inc = {}; m.inc.forEach(i => S.inc[i.id] = i); S.st = m.stats; S.model = m.model; render() }
+      else if (m.k === 'flows') { pulse(0); pulse(1); S.st = m.stats; m.rows.forEach((r, j) => line('#feed', ts() + ' ' + r, m.flags[j] ? 'bad' : '')); stat() }
+      else if (m.k === 'bus') { const i = AG.indexOf(m.frm); if (i >= 0) pulse(i); line('#bus', `${ts()} ${m.frm} → ${m.to}: ${m.txt}`, 'm') }
+      else if (m.k === 'inc') { S.inc[m.inc.id] = m.inc; S.st = m.stats; render() }
+    }
+    async function post(u) { let r = await fetch(u, { method: 'POST', headers: { 'X-API-Key': key } }); if (r.status === 401) { key = prompt('API key') || ''; r = await fetch(u, { method: 'POST', headers: { 'X-API-Key': key } }) } return r }
+    const inv = async id => { const r = await post('/api/investigate/' + id); if (!r.ok) alert(r.status === 503 ? 'Set TINYFISH_API_KEY on the server to use the TinyFish Agent' : 'Investigation failed (' + r.status + ')') };
+    const rep = on => post('/api/replay/' + on + '?rate=30');
+    const act = (id, a) => post('/api/' + (a === 'ok' ? 'approve' : a === 'no' ? 'reject' : 'feedback') + '/' + id);
+    function stat() {
+      const s = S.st; $('#s1').textContent = (s.flows || 0).toLocaleString(); $('#s2').textContent = Object.keys(S.inc).length; $('#s3').textContent = s.live_n ? (s.precision * 100).toFixed(1) + '%' : '–'; $('#s4').textContent = s.live_n ? (s.recall * 100).toFixed(1) + '%' : '–'; $('#s5').textContent = s.ms ?? '–'; $('#s6').textContent = s.mttr != null ? s.mttr + 's' : '–';
+      $('#mode').textContent = `Replay of real labelled traffic: ${s.replay ? 'ON' : 'OFF'} · Firewall: ${s.enforce ? 'ENFORCING' : 'DRY-RUN'} · Blocked: ${(s.blocked || []).join(', ') || 'none'}`; const t = s.tf || {}; $('#tfs').textContent = t.enabled ? `TinyFish ON · search ${t.search} · fetch ${t.fetch} · agent ${t.agent} · errors ${t.errors}` : 'TinyFish OFF: set TINYFISH_API_KEY to enable live threat intel'
+    }
+    function render() {
+      stat(); const m = S.model; if (m) { const e = m.binary_ensemble_with_isolation_forest; $('#mod').innerHTML = `${esc(m.dataset)}<br>Attack detection: precision <code>${(e.precision * 100).toFixed(1)}%</code> · recall <code>${(e.recall * 100).toFixed(1)}%</code> · accuracy <code>${(e.accuracy * 100).toFixed(1)}%</code><br>5-class accuracy <code>${(m.multiclass_accuracy * 100).toFixed(1)}%</code> · recall DoS ${(m.per_class.DoS.recall * 100).toFixed(0)}% · Probe ${(m.per_class.Probe.recall * 100).toFixed(0)}% · R2L ${(m.per_class.R2L.recall * 100).toFixed(0)}%<br><i>${esc(m.note)}</i>` }
+      const link = u => /^https?:\/\//.test(u) ? `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" style="color:var(--ac)">` : '<a>';
+      const tfBlock = i => {
+        let h = ''; const n = i.intel; if (n && n.status === 'ok') h += `<p><b>TinyFish intel:</b> ${n.sources.length} sources${n.ti ? ` · IP found on reputation pages (score ${n.ti}/100)` : ''}<br>` + n.sources.slice(0, 3).map(s => `${link(s.url)}${esc(s.title || s.url)}</a> <span class="mu">(${esc(s.site)})</span>`).join('<br>') + '</p>';
+        else if (n && n.status === 'error') h += `<p class="mu">TinyFish intel unavailable: ${esc(n.error)}</p>`;
+        const d = i.deep; if (d && d.status === 'ok') { const r = d.result || {}; h += `<p><b>TinyFish Agent:</b> ${r.found === false ? 'page blocked or no data' : r.abuse_confidence_score != null ? `AbuseIPDB confidence <b>${r.abuse_confidence_score}/100</b> · ${r.total_reports ?? '?'} reports · ${esc(r.country || '?')} ${esc(r.isp || '')}` : (r.mitigations || []).map(esc).join(' · ')}</p>` }
+        else if (d) h += `<p class="mu">TinyFish Agent: ${esc(d.status)} ${esc(d.error || '')}</p>`; return h
+      };
+      const L = Object.values(S.inc).sort((a, b) => b.id - a.id).slice(0, 40);
+      $('#incs').innerHTML = L.length ? L.map(i => {
+        const cls = i.status === 'fp' ? 'fp' : ['contained', 'acknowledged'].includes(i.status) ? 'done' : i.sev >= 85 ? 'crit' : '';
+        const b = ['pending', 'review'].includes(i.status) ? `<button class="ap" onclick="act(${i.id},'ok')">${i.status === 'pending' ? 'Approve action' : 'Acknowledge'}</button><button class="rj" onclick="act(${i.id},'no')">Reject</button>` : '';
+        const f = i.status !== 'fp' ? `<button onclick="act(${i.id},'fp')">False positive</button>` : '';
+        const dp = `<button onclick="inv(${i.id})">Deep investigate (TinyFish Agent)</button>`;
+        const r = ['contained', 'acknowledged'].includes(i.status) ? `<button onclick="window.open('/api/report/${i.id}')">Report</button>` : '';
+        return `<div class="inc ${cls}"><h3><span>INC-${i.id} · ${esc(i.family)}</span><span class="tag">${i.status}</span></h3>
+  <p><b>${i.count}</b> events · <b>Severity</b> ${i.sev}/100 · <b>Conf</b> ${i.conf} · <b>Source</b> ${esc(i.source)}${i.ips.length ? ' · <b>IP</b> ' + esc(i.ips.join(', ')) : ''}</p>
+  <p><b>MITRE:</b> ${esc(i.mitre)}</p>${i.corr ? `<p style="color:var(--er)"><b>⚠ ${esc(i.corr)}</b></p>` : ''}
+  <p><b>Evidence:</b> ${i.why.map(esc).join(' · ')}</p>${tfBlock(i)}<p class="mu"><b>Playbook:</b> ${esc(i.playbook)}</p>
+  ${i.cmds.length ? `<p class="mu"><code>${i.cmds.map(esc).join('<br>')}</code></p>` : ''}
+  <p class="mu">${i.tl.slice(-4).map(t => esc(t[0] + '  ' + t[1])).join('<br>')}</p><div class="row">${b}${f}${dp}${r}</div></div>`
+      }).join('') : '<div class="empty">Waiting for traffic…</div>'
+    }
+    function setTheme(t) {
+      document.documentElement.setAttribute('data-theme', t);
+      try { localStorage.setItem('lazy_theme', t); } catch (e) { }
+      const thumb = $('#themeSliderThumb');
+      const btnDark = $('#btnThemeDark');
+      const btnLight = $('#btnThemeLight');
+      if (thumb && btnDark && btnLight) {
+        if (t === 'light') {
+          thumb.style.transform = 'translateX(100%)';
+          btnLight.classList.add('active');
+          btnDark.classList.remove('active');
+        } else {
+          thumb.style.transform = 'translateX(0)';
+          btnDark.classList.add('active');
+          btnLight.classList.remove('active');
+        }
+      }
+    }
+    const initTheme = (() => {
+      try {
+        return localStorage.getItem('lazy_theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      } catch (e) {
+        return 'dark';
+      }
+    })();
+    setTheme(initTheme);
+    connect();
+  </script>
+</body>
+
+</html>
