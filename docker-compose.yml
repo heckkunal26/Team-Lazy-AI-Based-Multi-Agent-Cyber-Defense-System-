@@ -1,0 +1,13 @@
+services:
+  defense:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      API_KEY: "change-me"                    # protects approve/reject/ingest endpoints
+      TINYFISH_API_KEY: "${TINYFISH_API_KEY}"   # from your shell or .env file
+      ENFORCE: "0"                            # 1 = really run firewall commands (needs NET_ADMIN + host network)
+      ALLOWLIST: "203.0.113.1"                # IPs that must never be blocked (office, monitoring)
+      LOG_SOURCES: "ssh:/logs/auth.log,web:/logs/nginx/access.log,suricata:/logs/suricata/eve.json"
+    volumes:
+      - /var/log:/logs:ro
+      - ./data_store:/app/reports

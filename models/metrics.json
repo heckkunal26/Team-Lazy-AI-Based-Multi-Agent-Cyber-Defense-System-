@@ -1,0 +1,98 @@
+{
+ "dataset": "NSL-KDD (KDDTrain+ 125,973 flows / KDDTest+ 22,544 flows)",
+ "train_seconds": 11.6,
+ "multiclass_accuracy": 0.7414,
+ "per_class": {
+  "DoS": {
+   "precision": 0.961,
+   "recall": 0.769,
+   "support": 7460.0
+  },
+  "Probe": {
+   "precision": 0.854,
+   "recall": 0.622,
+   "support": 2421.0
+  },
+  "R2L": {
+   "precision": 0.864,
+   "recall": 0.007,
+   "support": 2885.0
+  },
+  "U2R": {
+   "precision": 0.556,
+   "recall": 0.075,
+   "support": 67.0
+  },
+  "normal": {
+   "precision": 0.639,
+   "recall": 0.973,
+   "support": 9711.0
+  }
+ },
+ "binary_classifier_only": {
+  "tp": 7767,
+  "fp": 271,
+  "fn": 5066,
+  "tn": 9440,
+  "precision": 0.9663,
+  "recall": 0.6052,
+  "accuracy": 0.7633
+ },
+ "binary_ensemble_with_isolation_forest": {
+  "tp": 8544,
+  "fp": 293,
+  "fn": 4289,
+  "tn": 9418,
+  "precision": 0.9668,
+  "recall": 0.6658,
+  "accuracy": 0.7968
+ },
+ "confusion_matrix": {
+  "labels": [
+   "DoS",
+   "Probe",
+   "R2L",
+   "U2R",
+   "normal"
+  ],
+  "matrix": [
+   [
+    5740,
+    47,
+    0,
+    0,
+    1673
+   ],
+   [
+    166,
+    1505,
+    0,
+    0,
+    750
+   ],
+   [
+    0,
+    13,
+    19,
+    2,
+    2851
+   ],
+   [
+    0,
+    0,
+    3,
+    5,
+    59
+   ],
+   [
+    67,
+    198,
+    0,
+    2,
+    9444
+   ]
+  ]
+ },
+ "iso_threshold": 0.5668415983544679,
+ "note": "KDDTest+ deliberately contains attack types absent from training, so scores are lower than random-split numbers. These are honest held-out results."
+}
